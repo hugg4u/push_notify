@@ -2,6 +2,7 @@ import {initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getMessaging } from "firebase-admin/messaging";
 import express, { json } from "express";
 import cors from "cors";
+ var admin = require("firebase-admin");
 
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -29,18 +30,18 @@ app.use(function(req, res, next) {
 
 initializeApp({
   credential: applicationDefault(),
-  projectId: 'potion-for-creators',
+  projectId: '316507641081',
 });
 
 app.post("/send", function (req, res) {
-  const receivedToken = req.body.fcmToken;
+  const receivedToken = req.body.token;
   
   const message = {
     notification: {
       title: "Notification",
       body: 'This is a Test Notification'
     },
-    token: "YOUR FCM TOKEN HERE",
+    token: receivedToken,
   };
   
   getMessaging()
